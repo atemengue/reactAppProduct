@@ -1,28 +1,34 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { Router, Route, Switch } from 'react-router-dom';
+import createBrowserHistory from 'history/createBrowserHistory';
+import ProductCreate from './components/Products/ProductCreate';
+import ProductList from './components/Products/ProductList';
+import ProductUpdate from './components/Products/ProductUpdate';
+import ProductDelete from './components/Products/ProductDelete';
+import ProductShow from './components/Products/ProductShow';
+import Header from './components/Header';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
+
+const history =createBrowserHistory()
+const App = () => {
+  return (
+    <React.Fragment>
+      <Router history={history}>
+        <div>
+          <Header />
+          <Switch>
+            <Route path="/" component={ProductList} exact />
+            <Route path="/product/new" component={ProductCreate} exact />
+            <Route path="/product/edit" exact component={ProductUpdate} />
+            <Route path="/product/delete" exact component={ProductDelete}/>
+            <Route path="/product/show" exact component={ProductShow} />
+          </Switch>
+        </div>
+      </Router>
+
+    </React.Fragment>
+
+  );
 }
 
 export default App;
